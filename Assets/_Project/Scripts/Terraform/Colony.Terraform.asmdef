@@ -1,0 +1,17 @@
+{
+    "name": "Colony.Terraform",
+    "rootNamespace": "Colony.Terraform",
+    "references": [
+        "Colony.Core",
+        "Colony.World"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+    "name": "Colony.Tutorial",
+    "rootNamespace": "Colony.Tutorial",
+    "references": [
+        "Colony.Core",
+        "Colony.Building",
+        "Colony.World"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

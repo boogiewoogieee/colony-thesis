@@ -1,0 +1,27 @@
+{
+    "name": "Colony.Game",
+    "rootNamespace": "Colony.Game",
+    "references": [
+        "Colony.Core",
+        "Colony.Data",
+        "Colony.Economy",
+        "Colony.Population",
+        "Colony.Building",
+        "Colony.World",
+        "Colony.Terraform",
+        "Colony.Combat",
+        "Colony.Expedition",
+        "Colony.Tutorial",
+        "Colony.Persistence",
+        "Colony.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

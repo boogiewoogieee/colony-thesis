@@ -1,0 +1,17 @@
+{
+    "name": "Colony.Economy",
+    "rootNamespace": "Colony.Economy",
+    "references": [
+        "Colony.Core",
+        "Colony.Data"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

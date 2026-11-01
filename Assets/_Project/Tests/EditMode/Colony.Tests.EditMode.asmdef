@@ -1,0 +1,34 @@
+{
+    "name": "Colony.Tests.EditMode",
+    "rootNamespace": "Colony.Tests",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Colony.Core",
+        "Colony.Data",
+        "Colony.Economy",
+        "Colony.Population",
+        "Colony.Building",
+        "Colony.World",
+        "Colony.Terraform",
+        "Colony.Combat",
+        "Colony.Expedition",
+        "Colony.Tutorial",
+        "Colony.Persistence"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
