@@ -18,11 +18,12 @@ Each document answers the same questions, in this order:
 | --- | --- | --- |
 | 01 | [Repository and teamwork](01-repository-and-teamwork.md) | Git, Git LFS, branches, pull requests, protected `main`, meta files, merging scenes |
 | 02 | [Code architecture](02-code-architecture.md) | Simulation separate from presentation, assemblies, data in ScriptableObjects |
+| 03 | [Simulation core](03-simulation-core.md) | Fixed ticks, clock with pause and speed, calendar and days, messages between modules |
 | 05 | [Grid and building placement](05-grid-and-building-placement.md) | Hidden square grid, footprints, snapping, overlap check, one build level for all buildings |
 
-Numbers 03 (simulation core) and 04 (packages and main scene) are reserved for documents that are written with those systems.
+Number 04 (packages and main scene) is reserved for the document that is written with that task.
 
-New documents are added as systems are built (simulation core, packages and main scene, storage, energy, production, colonists, saving, weather, dome, grass, raids, expeditions, tutorial).
+New documents are added as systems are built (packages and main scene, storage, energy, production, colonists, saving, weather, dome, grass, raids, expeditions, tutorial).
 
 ## Glossary
 
@@ -33,8 +34,11 @@ New documents are added as systems are built (simulation core, packages and main
 | Commit | A saved snapshot of changes in git, with a message describing them. |
 | Edit Mode test | An automated test that runs inside the Unity Editor without pressing Play. |
 | Event | A message one part of the game sends ("the dome was activated") that other parts can react to. |
+| Frame | One picture drawn on the screen. Frames take a varying amount of time; ticks do not. |
 | Footprint | The rectangle of grid cells a building covers, for example 2 × 2. |
+| Game speed | How many times faster than normal the rules run. It changes how many ticks run per real second, not what a tick does. |
 | Grid cell | One square of the invisible building grid (10 m × 10 m). |
+| In-game day | A fixed number of ticks (28 800, which is 48 minutes of play at normal speed; to be confirmed). Daily rules run when a new one starts. |
 | LFS | Git Large File Storage: keeps big binary files (models, textures, audio) outside normal git history. |
 | Placeholder | A simple stand-in (a plain box) used until the real model exists. |
 | Pull request | A request to merge a branch into `main`, where changes are reviewed first. |
