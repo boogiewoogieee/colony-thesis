@@ -18,19 +18,26 @@ Each document answers the same questions, in this order:
 | --- | --- | --- |
 | 01 | [Repository and teamwork](01-repository-and-teamwork.md) | Git, Git LFS, branches, pull requests, protected `main`, meta files, merging scenes |
 | 02 | [Code architecture](02-code-architecture.md) | Simulation separate from presentation, assemblies, data in ScriptableObjects |
+| 05 | [Grid and building placement](05-grid-and-building-placement.md) | Hidden square grid, footprints, snapping, overlap check, one build level for all buildings |
 
-New documents are added as systems are built (simulation core, packages and main scene, storage, energy, grid building, production, colonists, saving, weather, dome, grass, raids, expeditions, tutorial).
+Numbers 03 (simulation core) and 04 (packages and main scene) are reserved for documents that are written with those systems.
+
+New documents are added as systems are built (simulation core, packages and main scene, storage, energy, production, colonists, saving, weather, dome, grass, raids, expeditions, tutorial).
 
 ## Glossary
 
 | Term | Meaning |
 | --- | --- |
 | Assembly | A separately compiled piece of the code. Each of our modules is one assembly. |
+| Build level | The single height at which every building stands, whatever the terrain below looks like. |
 | Commit | A saved snapshot of changes in git, with a message describing them. |
 | Edit Mode test | An automated test that runs inside the Unity Editor without pressing Play. |
 | Event | A message one part of the game sends ("the dome was activated") that other parts can react to. |
+| Footprint | The rectangle of grid cells a building covers, for example 2 × 2. |
+| Grid cell | One square of the invisible building grid (10 m × 10 m). |
 | LFS | Git Large File Storage: keeps big binary files (models, textures, audio) outside normal git history. |
 | Pull request | A request to merge a branch into `main`, where changes are reviewed first. |
 | ScriptableObject | A Unity asset that stores data (e.g. a building's cost) editable in the Inspector. |
 | Simulation | The part of the code that holds the game rules and state, independent of what is drawn on screen. |
+| Snapping | Moving a pointed position to the nearest allowed one, here to whole grid cells. |
 | Tick | One fixed step of the simulation (0.1 s of game time). |
