@@ -2,7 +2,7 @@
 
 **In one sentence:** the game's rules run as plain C# code (the simulation), completely separate from the Unity scene that only displays the game and passes player input to it.
 
-**Status:** the module folders and their assembly definitions exist; the simulation itself is being rebuilt from scratch under the conventions in `Docs/Architecture.md`. Parts below that name classes describe the design being built.
+**Status:** the module folders and their assembly definitions exist. The simulation loop (clock, calendar, event bus; see 03) and the building grid (see 05) are built. The scene does not run the simulation yet, and the other modules are still empty; parts below that describe them describe the design being built.
 
 ## Why we need it
 
@@ -31,13 +31,13 @@ An economic strategy game is mostly rules and numbers: resources, energy, produc
 ## Where it lives
 
 - `Assets/_Project/Scripts/<Module>/Colony.<Module>.asmdef`: module boundaries and allowed references.
-- `Assets/_Project/Scripts/Game/`: will hold `GameBootstrap`, the link between scene and simulation (not built yet).
+- `Assets/_Project/Scripts/Game/`: holds `GameBootstrap`, the link between the scene and the game rules. Today it creates the building grid and the placement parts (see 05); creating and updating the simulation is added with the main scene task.
 - `Docs/Architecture.md`: the full module table and coding conventions.
 
 ## How we know it works
 
 - The project compiles: a forbidden reference between modules would be a compile error.
-- Every simulation rule will get Edit Mode tests in `Assets/_Project/Tests/EditMode/`, which create a simulation without any scene. There are none yet: the simulation is being rebuilt.
+- Every simulation rule gets Edit Mode tests in `Assets/_Project/Tests/EditMode/`, which run without any scene. So far: the simulation core (`Core/`, see 03) and the building grid (`Building/`, see 05).
 
 ## Likely questions
 
