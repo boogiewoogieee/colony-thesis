@@ -2,6 +2,8 @@
 
 **In one sentence:** the game's rules run as plain C# code (the simulation), completely separate from the Unity scene that only displays the game and passes player input to it.
 
+**Status:** the module folders and their assembly definitions exist; the simulation itself is being rebuilt from scratch under the conventions in `Docs/Architecture.md`. Parts below that name classes describe the design being built.
+
 ## Why we need it
 
 An economic strategy game is mostly rules and numbers: resources, energy, production, colonists, days. If those rules were spread across scene objects (`MonoBehaviour` scripts), they would depend on what is loaded in the scene, on frame rate and on Play Mode, which makes them hard to test, hard to save and easy to break by accident.
@@ -29,13 +31,13 @@ An economic strategy game is mostly rules and numbers: resources, energy, produc
 ## Where it lives
 
 - `Assets/_Project/Scripts/<Module>/Colony.<Module>.asmdef`: module boundaries and allowed references.
-- `Assets/_Project/Scripts/Game/GameBootstrap.cs`: the link between scene and simulation.
+- `Assets/_Project/Scripts/Game/`: will hold `GameBootstrap`, the link between scene and simulation (not built yet).
 - `Docs/Architecture.md`: the full module table and coding conventions.
 
 ## How we know it works
 
 - The project compiles: a forbidden reference between modules would be a compile error.
-- Simulation rules are covered by Edit Mode tests in `Assets/_Project/Tests/EditMode/`, which create a simulation without any scene.
+- Every simulation rule will get Edit Mode tests in `Assets/_Project/Tests/EditMode/`, which create a simulation without any scene. There are none yet: the simulation is being rebuilt.
 
 ## Likely questions
 
@@ -46,3 +48,7 @@ An economic strategy game is mostly rules and numbers: resources, energy, produc
 **How does the UI know what to show?** It reads the simulation's state and subscribes to its events; it never changes state directly, it sends commands.
 
 **Where would a designer change a building's cost?** In its ScriptableObject asset under `Assets/_Project/Data/`, in the Inspector. No code change.
+
+**Why does the code follow such strict naming and style rules?** Code is read far more often than it is written, and four people must be able to explain it. Fixed rules (listed in `Docs/Architecture.md` > Conventions) mean every file looks the same, so a name alone says what something is: capitals mean a constant (`MAX_FRAME_SECONDS`), a leading underscore means a private field (`_elapsedSeconds`), and `On` at the start means an event (`OnDayStarted`).
+
+**Why are there no global objects ("singletons") that any script can reach?** Unity keeps global (static) values alive between test runs in the Editor, so old state could leak into a new game. Instead, one scene object, `GameBootstrap`, will create the simulation and hand it to whatever needs it.
