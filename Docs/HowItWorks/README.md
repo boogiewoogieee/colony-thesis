@@ -36,7 +36,9 @@ New documents are added as systems are built (simulation core, packages and main
 | Footprint | The rectangle of grid cells a building covers, for example 2 × 2. |
 | Grid cell | One square of the invisible building grid (10 m × 10 m). |
 | LFS | Git Large File Storage: keeps big binary files (models, textures, audio) outside normal git history. |
+| Placeholder | A simple stand-in (a plain box) used until the real model exists. |
 | Pull request | A request to merge a branch into `main`, where changes are reviewed first. |
+| Ray | An imaginary straight line from the camera through the mouse pointer, used to find what the player points at. |
 | ScriptableObject | A Unity asset that stores data (e.g. a building's cost) editable in the Inspector. |
 | Simulation | The part of the code that holds the game rules and state, independent of what is drawn on screen. |
 | Snapping | Moving a pointed position to the nearest allowed one, here to whole grid cells. |

@@ -2,7 +2,7 @@
 
 **In one sentence:** the colony's ground is divided into invisible square cells, every building covers a whole number of them, and all buildings stand at one fixed height called the build level.
 
-**Status:** this document covers the rules (which cells a building covers, where it may stand). How the player sees and controls placement in the scene is added with the placement view.
+**Status:** prototype. Buildings are shown as plain boxes, cost nothing, and cannot be removed, rotated or saved yet.
 
 ## Why we need it
 
@@ -37,6 +37,24 @@ Example: the pointer is 1 m east and 1 m north of the map centre. For a Silo (1 
 
 All of these except the two data classes are plain C# with no connection to the scene, so they can be tested without pressing Play (see 02).
 
+### In the scene: pointing, preview and camera
+
+1. **Where the mouse points.** We draw an imaginary straight line (a ray) from the camera through the mouse pointer. We do not ask where this line hits the terrain. We ask where it crosses a flat, horizontal, invisible plane at the height of the build level. This is the whole "height lock": hills and holes in the terrain cannot change the result, and the terrain needs no collision shape for building.
+2. **Preview.** The crossing point is snapped to cells (step 3 above), and a preview box is shown there, standing on the build level. It is green when the rules answer "allowed" and red otherwise (outside the grid, or occupied).
+3. **Placing.** A left click asks the rules to place the selected building. If they agree, a grey box appears in its place. Number keys 1 to 3 choose the building: Silo, Residential Building, Factory.
+4. **Camera.** The camera looks down at a point on the build level from a fixed angle. W, A, S, D or the arrow keys move that point; the mouse wheel changes the distance. The point cannot leave the grid.
+5. **Who connects what.** One object in the scene, `GameBootstrap`, creates the grid, the rules, and the controls when the scene starts, and hands them to the camera, the placement controller and the view. No script searches for another one.
+
+| Class (all in `Colony.Game`) | Job |
+| --- | --- |
+| `GameBootstrap` | Creates everything at scene start and connects the parts. |
+| `PrototypeControls` | The keys and mouse buttons of the prototype, read through Unity's Input System. |
+| `BuildSite` | The build level in the scene: pointer on the screen → cells, and cells → position in the world. |
+| `BuildingPlacementController` | Every frame: pick building, find the cells under the pointer, show the preview, place on click. |
+| `BuildingPlaceholder` | A box standing in for a building model: sized to the footprint, 8 m tall. |
+| `PlacedBuildingsView` | Listens for `OnBuildingPlaced` and creates a box for each placed building. |
+| `IsometricCameraRig` | Camera angle, pan and zoom. |
+
 ## Why this approach
 
 | Option | Why not (or why) |
@@ -47,6 +65,8 @@ All of these except the two data classes are plain C# with no connection to the 
 | Buildings follow the terrain height | Every model would need to fit every slope; buildings next to each other would stand at different heights. |
 | Flattening the terrain under each building | Needs terrain editing at run time and changes the artist's terrain. |
 | **Square hidden grid, one build level (chosen)** | Overlap is a table lookup, sizes are whole cells, every model fits everywhere, and the rules are plain code that tests can check. |
+| Finding the pointed spot with a physics raycast against the terrain | Needs a collision shape for the whole terrain (expensive for a detailed mesh) and returns the terrain's height, which we do not want. A ray against a flat plane is one small calculation. |
+| Cinemachine camera package | Planned for the full camera (T09). Not installed yet; the prototype uses one small script so no package had to be added. |
 
 Why the cell size and the build level are in a data asset and not in the code: they are design values the team may change (GDD numbers are not final). Changing them is an edit in the Inspector, not a code change.
 
@@ -57,6 +77,8 @@ Why the cell size and the build level are in a data asset and not in the code: t
 - `Assets/_Project/Data/BuildGridSettings.asset`: the grid values.
 - `Assets/_Project/Data/Buildings/`: one asset per building type.
 - `Assets/_Project/Tests/EditMode/Building/`: the tests.
+- `Assets/_Project/Scripts/Game/`: `GameBootstrap`, `PrototypeControls`, `BuildSite`, `BuildingPlacementController`, `BuildingPlaceholder`, `PlacedBuildingsView`, `IsometricCameraRig`.
+- `Assets/Scenes/Prototype.unity`: the prototype scene (camera, light, a flat 1 km placeholder ground, `Game Bootstrap`, `Building Placement`, `Placed Buildings`).
 
 ## How we know it works
 
@@ -67,7 +89,15 @@ Edit Mode tests (**Window > General > Test Runner > EditMode**), 53 in total:
 - `BuildingRegistryTests`: placing adds the building and raises the event once; a second building on the same cells is refused and changes nothing.
 - `GridAreaTests`: a footprint with zero or negative size is rejected.
 
-To check by hand: open `BuildGridSettings.asset` and a building asset in the Inspector and read the values the rules use.
+The scene part (pointer, preview, camera) has no automated tests; it is checked by hand:
+
+1. Open `Assets/Scenes/Prototype.unity` and press Play.
+2. Move the mouse over the ground: a green box follows it in steps of one cell.
+3. Left click: a grey box stays. Point at it again: the preview turns red and a click does nothing.
+4. Press 2, then 3: the preview changes to 2 × 2 and 3 × 2 cells.
+5. Move with W, A, S, D and zoom with the mouse wheel. Move the preview past the edge of the ground: it turns red.
+6. Select any placed box in the Hierarchy: its Y position is always 4 (build level 0 plus half of the 8 m box height), wherever it stands.
+7. Stop, change `Build Level Height Metres` in `BuildGridSettings.asset` to 5, press Play: every box now stands 5 m higher. Set it back to 0.
 
 ## Likely questions
 
@@ -76,6 +106,10 @@ To check by hand: open `BuildGridSettings.asset` and a building asset in the Ins
 **How do you check that two buildings do not overlap?** Each cell remembers whether it is taken. A new building is allowed only if none of its cells is taken. We never compare buildings with each other.
 
 **Why do all buildings stand at the same height when the terrain is uneven?** The models are built on slabs and piles that bridge the gap to the ground. A single height means every model fits everywhere and neighbouring buildings line up.
+
+**How does the game know where the mouse points if it ignores the terrain?** It draws a line from the camera through the pointer and calculates where that line crosses a flat plane at the build level. No terrain data is involved.
+
+**What is `GameBootstrap` for?** It is the single place where the parts of the game are created and connected when the scene starts. Because of it, no script needs a global object or a search by name to find another script.
 
 **What happens at the edge of the map?** A footprint that reaches past the last column or row gets the answer "outside the grid" and cannot be placed.
 
