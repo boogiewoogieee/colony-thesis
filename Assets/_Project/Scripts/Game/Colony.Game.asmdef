@@ -13,7 +13,8 @@
         "Colony.Expedition",
         "Colony.Tutorial",
         "Colony.Persistence",
-        "Colony.UI"
+        "Colony.UI",
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
