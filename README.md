@@ -72,6 +72,8 @@ Docs/
   GDD.md            Game design document
   Architecture.md   How the code is organised
   HowItWorks/       Plain-language explanations of every system, with likely defence questions
+    pl/             Polish (the main version)
+    en/             English (the same documents)
 ```
 
 Put new assets inside `Assets/_Project/`. Third-party assets from the Asset Store go in their own folders under `Assets/` and are not edited.
@@ -80,7 +82,7 @@ Put new assets inside `Assets/_Project/`. Third-party assets from the Asset Stor
 
 - [Game design document](Docs/GDD.md)
 - [Code architecture](Docs/Architecture.md)
-- [How it works](Docs/HowItWorks/README.md): every system explained in plain language, for the whole team. Read these before the thesis defence.
+- How it works: every system explained in plain language, for the whole team. Read these before the thesis defence. [Polish (main version)](Docs/HowItWorks/pl/README.md) · [English](Docs/HowItWorks/en/README.md)
 
 ## License
 
