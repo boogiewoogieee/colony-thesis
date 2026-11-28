@@ -10,7 +10,7 @@ Bachelor's thesis project, Game Development, Collegium Da Vinci, Poznań.
 
 | Name | Role | GitHub |
 | --- | --- | --- |
-| Tymoteusz Jaskólski | Programming | [@boogiewoogieee](https://github.com/boogiewoogieee) |
+| Tymoteusz Jaskólski | Programming | [@phanto17](https://github.com/phanto17) |
 | Weronika Górowska | | [@gorowskaw1-crypto](https://github.com/gorowskaw1-crypto) |
 | Jakub Błoński | | [@Dexter676](https://github.com/Dexter676) |
 | Oliwier Karło | | [@Thr4x1440](https://github.com/Thr4x1440) |
@@ -22,7 +22,7 @@ Bachelor's thesis project, Game Development, Collegium Da Vinci, Poznań.
 
 ## Getting started
 
-1. Clone `https://github.com/boogiewoogieee/colony-thesis` (GitHub Desktop: **File > Clone repository**).
+1. Clone `https://github.com/phanto17/colony-thesis` (GitHub Desktop: **File > Clone repository**).
 2. Open the folder in Unity Hub (**Add > Add project from disk**) with Unity 6000.6.7f1. The first import takes a few minutes.
 3. Set up scene and prefab merging once (see below).
 
