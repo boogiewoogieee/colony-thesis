@@ -31,7 +31,7 @@ We also need one place that answers "what day is it?", because several rules hap
 | `EventBus` | Subscribe to, unsubscribe from and publish messages (small structs). |
 | `ISimulationSystem` | The interface every piece of game logic implements: `Tick(in TickContext)`. |
 | `TickContext` | The information given to each system on each tick. |
-| `Simulation` | Owns the four above. `Update` (called once per frame by the scene), `Step` (run exactly N ticks, for tests), `Restore` (loading), `AddSystem`. |
+| `Simulation` | Owns the clock, the calendar, the event bus and the list of systems. `Update` (called once per frame by the scene), `Step` (run exactly N ticks, for tests), `Restore` (loading), `AddSystem`. |
 
 Other modules may read the clock and calendar, pause, change speed and subscribe to `OnDayStarted`. The methods that move time forward are only usable inside this module, so time can only advance through `Simulation`, which guarantees the systems are ticked.
 
